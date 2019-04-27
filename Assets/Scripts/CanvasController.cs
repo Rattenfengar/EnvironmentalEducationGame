@@ -10,7 +10,7 @@ public class CanvasController : MonoBehaviour
     public GameObject headerUI;
     public float speedParallax=0.02f;
     private float finalSpeed = 0;
-
+    //Game States
     public enum GameState { Idle, Playing, Pause}
     public GameState gameState = GameState.Idle; 
     // Start is called before the first frame update
