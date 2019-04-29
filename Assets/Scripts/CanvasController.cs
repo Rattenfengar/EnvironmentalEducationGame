@@ -13,7 +13,7 @@ public class CanvasController : MonoBehaviour
     private float finalSpeed = 0;
     private float direction = 1;
     //Game States
-    public enum GameState { Idle, Playing, Pause}
+    public enum GameState { Idle, Playing, Pause, GameOver}
     public GameState gameState = GameState.Idle; 
     // Start is called before the first frame update
     void Start()
@@ -58,5 +58,9 @@ public class CanvasController : MonoBehaviour
         {
             direction *= -1;
         }
+    }
+    public void GameOver()
+    {
+        gameState = GameState.GameOver;
     }
 }

@@ -22,7 +22,7 @@ public class GeneratorController : MonoBehaviour
     }
     public void StartGenerator()
     {
-        InvokeRepeating("GenerateTrash", 1f, 0.5f);
+        InvokeRepeating("GenerateTrash", 1f, 1f);
     }
     public void StopGenerator()
     {
