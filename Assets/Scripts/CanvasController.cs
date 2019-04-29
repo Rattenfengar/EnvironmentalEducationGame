@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class CanvasController : MonoBehaviour
 {
+    public GameObject Generator;
     public RawImage bgSky;
     public GameObject idleText;
     public GameObject headerUI;
     public float speedParallax=0.02f;
     private float finalSpeed = 0;
+    private float direction = 1;
     //Game States
     public enum GameState { Idle, Playing, Pause}
     public GameState gameState = GameState.Idle; 
@@ -27,14 +29,16 @@ public class CanvasController : MonoBehaviour
             gameState = GameState.Playing;
             headerUI.SetActive(true);
             idleText.SetActive(false);
+            Generator.SendMessage("StartGenerator");
         }
         else if (gameState == GameState.Playing && (Input.GetKeyDown(KeyCode.P)))
         {
             gameState = GameState.Pause;
+            Generator.SendMessage("CancelGenerator");
         }
         else if (gameState == GameState.Pause)
         {
-
+            Generator.SendMessage("CancelGenerator");
         }
         else if (gameState == GameState.Playing)
         {
@@ -44,7 +48,15 @@ public class CanvasController : MonoBehaviour
     }
     void Parallax()
     {
-        finalSpeed = speedParallax * Time.deltaTime;
-        bgSky.uvRect = new Rect(0f, bgSky.uvRect.y + finalSpeed, 1f, 1f);
+        finalSpeed = speedParallax * Time.deltaTime*direction;
+        bgSky.uvRect = new Rect(bgSky.uvRect.x+finalSpeed, 0f, 1f, 1f);
+        if (bgSky.uvRect.x > 0.4)
+        {
+            direction *= -1;
+        }
+        if (bgSky.uvRect.x < 0)
+        {
+            direction *= -1;
+        }
     }
 }
