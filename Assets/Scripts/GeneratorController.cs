@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GeneratorController : MonoBehaviour
 {
+    public float SpeedGenerator = 1f;
     public GameObject Trash;
     // Start is called before the first frame update
     void Start()
@@ -22,10 +23,14 @@ public class GeneratorController : MonoBehaviour
     }
     public void StartGenerator()
     {
-        InvokeRepeating("GenerateTrash", 1f, 1f);
+        InvokeRepeating("GenerateTrash", 1f, SpeedGenerator);
     }
     public void StopGenerator()
     {
         CancelInvoke("GenerateTrash");
+    }
+    public void IncreaseSpeed()
+    {
+        SpeedGenerator *= 0.9f;
     }
 }

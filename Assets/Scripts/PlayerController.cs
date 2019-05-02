@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private readonly float health = 100;
-    public int points=0;
+    public int points = 0;
     private Animator animator;
     private Rigidbody2D Rigidbody;
     private Transform Direction;
@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private float Jump;
     private float Move;
     private int direction;
-    private string expectedTag;
+    public string expectedTag;
     public UnityEngine.UI.Text Statistics;
     public GameObject Canvas;
     public UnityEngine.UI.Text TrashType;
@@ -44,26 +44,28 @@ public class PlayerController : MonoBehaviour
             animator.Play("PlayerMoving");
         else
             animator.Play("PlayerAnimation");
-        if (points < 0)
-            Canvas.SendMessage("GameOver");
         //Use the two store floats to create a new Vector2 variable movement.
         Vector2 movement = new Vector2(Move, 0);
 
         //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
         Rigidbody.velocity = movement * Speed;
-        
+
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name=="Enemy"&&collision.tag == expectedTag)
+        if (collision.tag == expectedTag)
         {
             points += 10;
             Statistics.text = points.ToString();
         }
         else
-        {            
-            points -= 5;
-            Statistics.text = points.ToString();
+        {
+            DeacreasePoints();
         }
+    }
+    public void DeacreasePoints()
+    {
+        points -= 5;
+        Statistics.text = points.ToString();
     }
 }

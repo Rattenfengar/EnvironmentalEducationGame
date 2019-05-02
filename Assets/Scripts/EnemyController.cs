@@ -7,6 +7,8 @@ public class EnemyController : MonoBehaviour
     private float FallingSpeed = -10f;
     private Rigidbody2D Rigidbody;
     private SpriteRenderer icon;
+    public UnityEngine.UI.Text currentTag;
+    public GameObject Player;
     public Sprite[] SpritesPlastic;
     public Sprite[] SpriteOrganic;
     public Sprite[] SpriteOrdinary;
