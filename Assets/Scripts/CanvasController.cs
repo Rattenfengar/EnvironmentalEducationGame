@@ -9,18 +9,23 @@ public class CanvasController : MonoBehaviour
     public RawImage bgSky;
     public GameObject idleText;
     public GameObject headerUI;
+    public GameObject GameOverUI;
     public Text TimeLeftLable;
     public float speedParallax=0.02f;
     private float finalSpeed = 0;
     private float direction = 1;
     public float TimeLeft = 100;
+    private AudioSource backgroundSound;
     //Game States
     public enum GameState { Idle, Playing, Pause, GameOver}
     public GameState gameState = GameState.Idle; 
     // Start is called before the first frame update
     void Start()
     {
+        backgroundSound = GetComponent<AudioSource>();
+        backgroundSound.Play();
         headerUI.SetActive(false);
+        GameOverUI.SetActive(false);
         TimeLeftLable.text = TimeLeft.ToString();
     }
 
@@ -54,7 +59,8 @@ public class CanvasController : MonoBehaviour
         {
             Generator.SendMessage("StopGenerator");
             headerUI.SetActive(false);
-            idleText.SetActive(true);
+            GameOverUI.SetActive(true);
+
         }
         
     }

@@ -6,8 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     private readonly float health = 100;
     public int points = 0;
+    public int[] pointsType = { 0, 0, 0, 0, 0 };
     private Animator animator;
     private Rigidbody2D Rigidbody;
+    private AudioSource pointGotten;
     private Transform Direction;
     private float Speed = 15f;
     private float Jump;
@@ -17,6 +19,11 @@ public class PlayerController : MonoBehaviour
     public UnityEngine.UI.Text Statistics;
     public GameObject Canvas;
     public UnityEngine.UI.Text TrashType;
+    public UnityEngine.UI.Text Plasticos;
+    public UnityEngine.UI.Text Organicos;
+    public UnityEngine.UI.Text Ordinarios;
+    public UnityEngine.UI.Text Metales;
+    public UnityEngine.UI.Text Papel;
     private string[] tags = { "Plasticos", "Organicos", "Ordinarios", "Metales", "Papel" };
     // Start is called before the first frame update
     void Start()
@@ -24,6 +31,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         Rigidbody = GetComponent<Rigidbody2D>();
         Direction = GetComponent<Transform>();
+        pointGotten = GetComponent<AudioSource>();
         InvokeRepeating("RandomTag", 0f, 30f);
     }
     void RandomTag()
@@ -55,8 +63,32 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.tag == expectedTag)
         {
+            switch (expectedTag)
+            {
+                case "Plasticos":
+                    pointsType[0] += 10;
+                    break;
+                case "Metales":
+                    pointsType[1] += 10;
+                    break;
+                case "Organicos":
+                    pointsType[2] += 10;
+                    break;
+                case "Ordinarios":
+                    pointsType[3] += 10;
+                    break;
+                case "Papel":
+                    pointsType[4] += 10;
+                    break;
+            }
             points += 10;
             Statistics.text = points.ToString();
+            Plasticos.text = pointsType[0].ToString();
+            Metales.text = pointsType[1].ToString();
+            Organicos.text = pointsType[2].ToString();
+            Ordinarios.text = pointsType[3].ToString();
+            Papel.text = pointsType[4].ToString();
+            pointGotten.Play();
         }
         else
         {
