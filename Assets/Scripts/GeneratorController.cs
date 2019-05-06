@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GeneratorController : MonoBehaviour
 {
-    public float SpeedGenerator = 1f;
+    public float SpeedGenerator = 1.2f;
     public GameObject Trash;
     // Start is called before the first frame update
     void Start()

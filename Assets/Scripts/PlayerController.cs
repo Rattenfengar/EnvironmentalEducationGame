@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     private AudioSource pointGotten;
     private Transform Direction;
     private float Speed = 15f;
-    private float Jump;
     private float Move;
     private int direction;
     public string expectedTag;
